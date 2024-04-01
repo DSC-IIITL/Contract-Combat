@@ -1,10 +1,34 @@
-This contract implements a multi-signature wallet with the following features:
+## Multi-Signature Wallet with Guardian Approval
 
-1.Owner controls permission for sending funds and sets spending limits.
-2.Guardians can propose and vote on changing the wallet owner.
-3.Funds can be sent from the wallet by the owner or authorized addresses within their limits.
+This README.md file describes the `WalletImplementation` contract, a secure multi-signature wallet with guardian approval for owner changes.
 
-Sequence for uploading file:
-1. Contract: ![./SmartContractWallet.sol]
-2. Remix Screenshot : ![./Remix.png]
-3. Explainatin of the code : ![./Explaination.md]
+**Features:**
+
+* **Multi-Signature Transactions:** Requires permission from authorized addresses before sending funds.
+* **Spending Limits:** Sets spending limits for authorized addresses to prevent unauthorized spending.
+* **Guardian Approval:** Leverages guardians to vote on and approve owner changes.
+* **Security:**
+    * Prevents the owner from revoking permissions of guardians.
+    * Requires a majority vote from guardians to change the owner.
+
+**Components:**
+
+* **Owner:** The current owner of the wallet, who can manage permissions and propose owner changes.
+* **Guardians:** Designated addresses with voting rights for owner changes.
+* **Authorized Addresses:** Addresses allowed to send funds from the wallet, subject to spending limits.
+
+**Functionalities:**
+
+* **`DenySending(address payable _from)`:** (Only Owner) Revokes spending permission for an address.
+* **`SetAllowance(address _add, uint _allowance)`:** (Only Owner) Sets a spending limit for an authorized address.
+* **`SetGuardian(address payable _add, bool _isGuardian)`:** (Only Owner) Grants or revokes guardian status for an address.
+* **`ProposeChangeinOwner(address payable newOwner)`:** (Only Guardians) Proposes a new owner for the wallet. Requires a majority vote from guardians to approve.
+* **`TransferFunds(address payable _to, uint256 _amount, bytes memory _payload)`:** Sends funds from the wallet. Requires permission and sufficient allowance for non-owner senders.
+
+**Deployment and Usage:**
+
+1. Deploy the contract on your desired blockchain network.
+2. The initial deployer becomes the owner.
+3. The owner can set guardians and authorized addresses.
+4. Guardians can propose and vote on owner changes.
+5. Authorized addresses can send funds within their limits.
