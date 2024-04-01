@@ -41,6 +41,8 @@ Contract Structure:
 6]getTweet: Retrieves a specific tweet by index for the caller.
 7]getAllTweets: Retrieves all tweets of a specified user.
 
+![remix image](image.png)
+
 How it Works:
 
 1]Users interact with the Twitter contract by calling its functions.
